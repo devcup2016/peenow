@@ -175,3 +175,7 @@ footer {
 	margin: 0px auto;
 	border:1px solid red;
 }
+
+.nopadding {
+    padding:0 !important;
+}
