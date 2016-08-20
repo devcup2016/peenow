@@ -144,7 +144,7 @@ footer {
 }
 
 .places li a {
-	color: #fff;
+    color: #fff;
     display: block;
     position: relative;
     padding: 10px;
@@ -153,8 +153,8 @@ footer {
 }
 
 .places li a strong {
-	font-size: 18px;
-	font-weight: bold !important;
+    font-size: 18px;
+    font-weight: bold !important;
 }
 
 .places li a img {
@@ -166,16 +166,59 @@ footer {
 }
 
 .places.autoY {
-	height: 430px;
-	/*border:1px solid red;*/
+    height: 430px;
+    /*border:1px solid red;*/
 }
 
 .camera-wrapper {
-	width: 90%;
-	margin: 0px auto;
-	border:1px solid red;
+    width: 90%;
+    margin: 0px auto;
+    border: 1px solid red;
 }
 
 .nopadding {
-    padding:0 !important;
+    padding: 0 !important;
+}
+
+.infowrapper {
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    width: 90%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    text-align: center;
+}
+
+.infowrapper input[type="text"] {
+    font-size: 25px;
+    padding: 10px 15px;
+    max-width: 100%;
+    width: 100%;
+    border: 3px solid #fff;
+    margin: 10px auto;
+    background-color: transparent;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    color: #fff;
+}
+
+.infowrapper a {
+    width: 70%;
+    display: inline-block;
+    background-color: #475059;
+    padding: 15px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    color: #fff;
+    font-family: 'CameronSansExtraBold';
+    text-decoration: none;
+    position: relative;
+}
+
+.infowrapper a:active {
+	top: 5px;
 }

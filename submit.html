@@ -4,7 +4,9 @@
 <head>
     <script src="phonegap.js"></script>
     <script src="assets/js/init.js"></script>
-    <script>GLOBALS.origin = "submit"</script>
+    <script>
+    GLOBALS.origin = "submit"
+    </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,14 +31,12 @@
     </header>
     <div class="container content nopadding">
         <!--view-->
-       <img src="" alt="" id="myImage">
-
-       <div class="infowrapper" style="position:absolute;bottom:130px; left:50%;transform:translateX(-50%);-webkit-transform:translateX(-50%);-moz-transform:translateX(-50%);">
-        <input type="text" id="caption" style="width:90%;margin-bottom:10px;">
-       <a id="submitBtn" href="javascript:void(0)" style="width:90%;margin-bottom:10px;">SUBMIT</a>
-       
-       </div>
-       <!--view-->
+        <img src="" alt="" id="myImage">
+        <div class="infowrapper">
+            <input type="text" id="caption">
+            <a id="submitBtn" href="javascript:void(0)">SUBMIT</a>
+        </div>
+        <!--view-->
     </div>
     <footer>
         <a href="index.html" class="col-4">
