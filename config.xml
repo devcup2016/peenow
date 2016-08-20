@@ -9,20 +9,27 @@
 
     <description> An example for phonegap build docs. </description>   
 
-    <preference name="fullscreen" value="true" />
-    <preference name="orientation" value="portrait" />
-
-    <gap:plugin name="org.apache.cordova.geolocation" /> 
-    <gap:plugin name="org.apache.cordova.device" version="0.2.3" />
-    <preference name="permissions" value="none"/>
-
-       <gap:plugin name="org.apache.cordova.camera" />
-
-
-
     <gap:plugin name="cordova-plugin-whitelist" source="npm" />
     <access origin="http://dev.isci.storyteching.ph/api/" subdomains="true" />
     <access origin="*" />
     <allow-intent href="*" />
     <allow-navigation href="*" />
+    
+    
+    <preference name="permissions" value="none"/>
+
+    <preference name="fullscreen" value="true" />
+    <preference name="orientation" value="portrait" />
+
+    <feature name="http://api.phonegap.com/1.0/geolocation"/>
+    <feature name="http://api.phonegap.com/1.0/camera"/>
+
+
+    <gap:plugin name="org.apache.cordova.geolocation" />
+    
+    <gap:plugin name="org.apache.cordova.camera" />  
+    
+    <preference name="phonegap-version" value="3.7.0" />
+   
+
 </widget>
