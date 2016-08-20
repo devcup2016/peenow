@@ -1,0 +1,22 @@
+{
+  "name": "peenow",
+  "version": "1.0.0",
+  "description": "devcup2016 entry",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devcup2016/peenow.git"
+  },
+  "keywords": [
+    "devcup"
+  ],
+  "author": "Domzg,Amiels,jepoyc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devcup2016/peenow/issues"
+  },
+  "homepage": "https://github.com/devcup2016/peenow#readme"
+}
