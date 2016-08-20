@@ -206,7 +206,34 @@ footer {
 }
 
 .infowrapper a {
-    width: 70%;
+    /*    width: 70%;
+    display: inline-block;
+    background-color: #475059;
+    padding: 15px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    color: #fff;
+    font-family: 'CameronSansExtraBold';
+    text-decoration: none;
+    position: relative;*/
+}
+
+.btn-rouded-wrapper {
+    margin: 10px 0 5px;
+    text-align: center;
+}
+
+.btn-rounded:hover,
+.btn-rounded:active,
+.btn-rounded:focus,
+.btn-rounded:visited {
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-rounded {
+    width: 45%;
     display: inline-block;
     background-color: #475059;
     padding: 15px;
@@ -217,8 +244,30 @@ footer {
     font-family: 'CameronSansExtraBold';
     text-decoration: none;
     position: relative;
+    margin-right:2%;
+    margin-left: 2%; 
 }
 
-.infowrapper a:active {
-	top: 5px;
+.btn-rounded:active {
+    top: 5px;
+    color: #fff;
+}
+
+.modal-d {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    width: 90%;
+    min-height: 100px;
+    border: 3px solid #fff;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 9999;
+    padding: 20px 20px 5px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    font-size: 20px;
 }
