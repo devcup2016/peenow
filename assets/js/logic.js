@@ -1,53 +1,55 @@
-alert("run now2")
-var geolocation_ready = function () {
-    setTimeout(function(){
-        try{
-            alert(navigator.geolocation)
-            navigator.geolocation.getCurrentPosition(disp);
-        } catch(e){
-            var error = document.createElement("div")
-            error.innerHTML = e;
-            document.body.appendChild(error)
-            geolocation_ready()
-        }
-    },500)
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady(){
+    var INIT = {};
+    var CALLBACKS = {};
+
+    INIT.index = function(){}
+
+    INIT.submit = function(){
+        navigator.camera.getPicture(CALLBACKS.camera, CALLBACKS.error, { quality: 50,
+            destinationType: Camera.DestinationType.DATA_URL
+        });
+    }
+
+    INIT.find = function(){
+        navigator.geolocation.getCurrentPosition(disp);
+    }
+
+    CALLBACKS.geolocation = function(pos){
+        var lat = pos.coords.latitude;
+        var long = pos.coords.longitude;
+    }
+
+    CALLBACKS.camera = function(imageData){
+        var image = document.getElementById('myImage');
+        image.src = "data:image/jpeg;base64," + imageData;
+
+        navigator.geolocation.getCurrentPosition(function(pos){
+            mPost({
+                url: GLOBALS.server + "areas",
+                method: "POST",
+                data: {
+                    'image_text' : imageData,
+                    'description' : 'lorem ipsum',
+                    'lat' : pos.coords.latitude,
+                    'lng' : pos.coords.longitude,
+                },
+                success: function(data){
+                    alert(data)
+                },
+                fail: function(error){
+                    alert(error)
+                }
+            })
+        })
+    }
+
+    CALLBACKS.error = function(err){
+        alert('Failed because: ' + err);
+    }
+
+
+    INIT[GLOBALS.origin]();
 }
 
-var camera_ready = function () {
-    setTimeout(function(){
-        try{
-            alert(navigator.camera)
-            navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-                destinationType: Camera.DestinationType.DATA_URL
-            });
-        } catch(e){
-            var error = document.createElement("div")
-            error.innerHTML = e;
-            document.body.appendChild(error)
-            camera_ready()
-        }
-    },500)
-}
-
-
-camera_ready()
-geolocation_ready()
-
-
-
-function disp(pos) {
-   var lat = pos.coords.latitude;
-   var long = pos.coords.longitude;
-   alert(lat + ", " + long);
-}
-
-
-
-function onSuccess(imageData) {
-    var image = document.getElementById('myImage');
-    image.src = "data:image/jpeg;base64," + imageData;
-}
-
-function onFail(message) {
-    alert('Failed because: ' + message);
-}

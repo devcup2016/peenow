@@ -10,7 +10,7 @@
     <description> An example for phonegap build docs. </description>   
 
     <gap:plugin name="cordova-plugin-whitelist" source="npm" />
-    <access origin="http://dev.isci.storyteching.ph/api/" subdomains="true" />
+    <access origin="http://pee.storyteching.ph/api/" subdomains="true" />
     <access origin="*" />
     <allow-intent href="*" />
     <allow-navigation href="*" />
