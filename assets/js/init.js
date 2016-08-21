@@ -39,13 +39,15 @@ function PopUpManager() {
     this.cancelBtn = document.getElementById("cancelBtn");
     this.popupContent = document.getElementById("popupContent");
 
+    this.callback = null;
+
     this.okBtn.addEventListener('click', function() {
-        alert('click ok');
-    }, false);
+        this.callback();
+    }.bind(this), false);
 
     this.cancelBtn.addEventListener('click', function() {
-        alert('click cancel');
-    }, false);
+        this.close();
+    }.bind(this), false);
 }
 
 PopUpManager.prototype.init = function() {
@@ -60,7 +62,7 @@ PopUpManager.prototype.close = function(){
 	if (this.instance) this.instance.style.display = "none";
 };
 
-PopUpManager.prototype.open = function(type, content) {
+PopUpManager.prototype.open = function(type, content, callback) {
     if (this.instance) this.instance.style.display = "block";
 
     switch (type) {
@@ -75,23 +77,6 @@ PopUpManager.prototype.open = function(type, content) {
             // ...
             break;
     }
-};
 
-window.onload = function() {
-    var PopupManager = new PopUpManager();
-    PopupManager.init();
-    // PopupManager.debug();
-
-   	// Sample Open
-    var submitBtn = document.getElementById('submitBtn');
-    if (submitBtn) {
-        submitBtn.addEventListener('click', function() {
-            PopupManager.open(1, "Hello Amiel awesome! :D");
-        }, false);
-    }
-
-    // Sample Close
-    var delay = setTimeout(function(){
-    	PopupManager.close();
-    },3333);
+    this.callback = callback;
 };

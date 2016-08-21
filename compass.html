@@ -5,7 +5,7 @@
     <script src="phonegap.js"></script>
     <script src="assets/js/init.js"></script>
     <script>
-    GLOBALS.origin = "find"
+    GLOBALS.origin = "compass"
     </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,18 +39,19 @@
     </div>
     <div class="container content">
         <!--view-->
-            <div class="compassWrapper">
-                <div class="circle">
-                    <span class="pos north">NORTH</span>
-                    <span class="pos south">SOUTH</span>
-                    <span class="pos east">EAST</span>
-                    <span class="pos west">WEST</span>
+        <img src="" alt="" id="myImage">
+        <div class="compassWrapper">
+            <div class="circle">
+                <span class="pos north">NORTH</span>
+                <span class="pos south">SOUTH</span>
+                <span class="pos east">EAST</span>
+                <span class="pos west">WEST</span>
 
-                    <div class="rotator">
-                        <span class="triangle"></span>
-                    </div>
+                <div class="rotator" id="rotator">
+                    <span class="triangle"></span>
                 </div>
             </div>
+        </div>
         <!--view-->
     </div>
     <footer>

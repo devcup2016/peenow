@@ -4,7 +4,16 @@ function deg2rad(deg) {
   return deg * (Math.PI/180)
 }
 
+function rad2deg(deg) {
+  return deg * (180/Math.PI)
+}
+
+
 function onDeviceReady(){
+    var PopupManager = new PopUpManager();
+    PopupManager.init();
+    // PopupManager.debug();
+
     var INIT = {};
     var CALLBACKS = {};
     var DEBUG = {};
@@ -35,31 +44,28 @@ function onDeviceReady(){
                 var thumbData = thumb;
                 document.getElementById("submitBtn").addEventListener("click", function(){
                    
-                        var descData = document.getElementById("caption").value;
+                    var descData = document.getElementById("caption").value;
 
-                        var data = {
-                            'image_text' : imageData,
-                            'description' : descData,
-                            'image_thumb' : thumb,
-                            'lat' : GLOBALS.pos.lat,
-                            'lng' : GLOBALS.pos.lng,
+                    var data = {
+                        'image_text' : imageData,
+                        'description' : descData,
+                        'image_thumb' : thumb,
+                        'lat' : GLOBALS.pos.lat,
+                        'lng' : GLOBALS.pos.lng,
+                    }
+
+                    mPost({
+                        url: GLOBALS.server + "areas",
+                        method: "POST",
+                        data: data,
+                        success: function(data){
+                            PopupManager.open(1, "THANKS!", function(){PopupManager.close()})
+                        },
+                        fail: function(error){
+                            alert("no")
+                            alert(error)
                         }
-
-                        alert("submitting")
-
-                        mPost({
-                            url: GLOBALS.server + "areas",
-                            method: "POST",
-                            data: data,
-                            success: function(data){
-                                alert("go")
-                                alert(data)
-                            },
-                            fail: function(error){
-                                alert("no")
-                                alert(error)
-                            }
-                        })
+                    })
                   
                 }, false)
             })
@@ -108,6 +114,7 @@ function onDeviceReady(){
                     link.appendChild(img);
                     link.appendChild(details);
                     link.appendChild(distance);
+                    link.href = "compass.html?id=" + p.id
                     li.appendChild(link);
                     find_array.appendChild(li);
                 }
@@ -120,25 +127,76 @@ function onDeviceReady(){
     }
 
     INIT.compass = function(){
-       
+        var image = document.getElementById('myImage');
+        image.style.position = "absolute";
+        image.style.top = "0px";
+        image.style.left = "0px";
+        image.style.opacity = 0.5;
+        image.style.zIndex = "-1";
+        var queryBy_id = GLOBALS.server + "areas/" + document.URL.split("?id=")[1];
+        mPost({
+            url: queryBy_id,
+            method: "GET",
+            success: function(data){
+                try {
+                    var dataObj = JSON.parse(data)[0];
+                    image.style.width = "100%";
+                    image.style.height = "100%";
+                    image.src = "data:image/jpeg;base64," + dataObj.image_text;
+
+                    GLOBALS.target = {
+                        lat: dataObj.lat,
+                        lng: dataObj.lng
+                    }
+
+                    rotateCompass()
+                } catch(e){
+                    alert(e)
+                }
+                
+            },
+            fail: function(error){
+                alert("no")
+                alert(error)
+            }
+        })
+
+        function rotateCompass(){
+            var point_angle = parseInt(GLOBALS.angle) + parseInt(GLOBALS.compass)
+            if (GLOBALS.angle !== undefined){document.getElementById("rotator").style.transform = "translate(-50%, -50%) rotate("+point_angle+"deg)";}
+            setTimeout(function(){rotateCompass()},300)
+        }
     }
 
     INIT.all = function(){
-        navigator.geolocation.getCurrentPosition(function(pos){
-            GLOBALS.pos.lat = pos.coords.latitude;
-            GLOBALS.pos.lng = pos.coords.longitude;
-            DEBUG.geoDisplay.innerHTML = GLOBALS.pos.lat + "<br>" + GLOBALS.pos.lng;
+        navigator.compass.getCurrentHeading(function(compass){
+            navigator.geolocation.getCurrentPosition(function(pos){
+                GLOBALS.pos.lat = pos.coords.latitude;
+                GLOBALS.pos.lng = pos.coords.longitude;
+                GLOBALS.compass = compass.magneticHeading
+                DEBUG.geoDisplay.innerHTML = GLOBALS.pos.lat + "<br>" + GLOBALS.pos.lng + "<br>" + GLOBALS.compass;
 
-            var r = Math.floor(Math.random()*125);
-            var g = Math.floor(Math.random()*125);
-            var b = Math.floor(Math.random()*125);
+                var r = Math.floor(Math.random()*125);
+                var g = Math.floor(Math.random()*125);
+                var b = Math.floor(Math.random()*125);
 
-            DEBUG.geoDisplay.style.backgroundColor = "rgb("+ r+","+g+","+b+")";
+                DEBUG.geoDisplay.style.backgroundColor = "rgb("+ r+","+g+","+b+")";
 
-            setTimeout(function(){INIT.all()},500)
+                
 
-            if (GLOBALS.noInit){GLOBALS.noInit = false; INIT[GLOBALS.origin]()}
-        })
+                if (GLOBALS.target !== undefined &&  GLOBALS.target.lat !== undefined && GLOBALS.target.lng !== undefined){
+                    GLOBALS.angle = getAngle(GLOBALS.pos.lat, GLOBALS.pos.lng, GLOBALS.target.lat, GLOBALS.target.lng);
+                    DEBUG.geoDisplay.innerHTML += "<br>" + GLOBALS.angle
+                } else {
+                    DEBUG.geoDisplay.innerHTML += "<br>no angle"
+                }
+
+                
+                if (GLOBALS.noInit){GLOBALS.noInit = false; INIT[GLOBALS.origin]()};
+                setTimeout(function(){INIT.all()},300);
+            })
+        }, function(error){alert(error)});
+      
     }
 
     CALLBACKS.error = function(err){
@@ -186,11 +244,6 @@ function resizeImage(longSideMax, url, callback) {
 
 function getDistance(lat1, lng1, lat2, lng2){
     try {
-        alert(lat1)
-        alert(lng1)
-        alert(lat2)
-        alert(lng2)
-
         var R = 6371; // Radius of the earth in meters
         var dLat = deg2rad(lat2-lat1);  // deg2rad below
         var dLng = deg2rad(lng2-lng1); 
@@ -201,7 +254,7 @@ function getDistance(lat1, lng1, lat2, lng2){
             ; 
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
         var d = parseInt(((R * c)*1000)*100)/100; // Distance in meters
-       
+        
         return d;
     } catch(e){
         alert(e)
@@ -210,3 +263,23 @@ function getDistance(lat1, lng1, lat2, lng2){
 }
 
 
+
+function getAngle(lat1, lng1, lat2,lng2){
+    try {
+        var dLng = (lng2 - lng1);
+
+        var y = Math.sin(dLng) * Math.cos(lat2);
+        var x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLng);
+
+        var brng = Math.atan2(y, x);
+
+        brng = rad2deg(brng);
+        brng = (brng + 360) % 360;
+        brng = 360 - brng;
+
+        return brng;
+    } catch(e){
+        alert(e)
+        return 1
+    }
+}
