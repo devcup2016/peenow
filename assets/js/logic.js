@@ -10,28 +10,41 @@ function onDeviceReady(){
         navigator.camera.getPicture(function(imageData){
             var image = document.getElementById('myImage');
             image.style.width = "100%";
-            image.style.maxWidth = "100%";
-            image.style.height = "auto";
+            image.style.height = "100%";
             image.src = "data:image/jpeg;base64," + imageData;
-           
-            resizeImage(150, image.src, function(thumb){
-                alert(thumb)
+            
+            alert("this is the real deal")
+            alert(imageData);
+
+            resizeImage(120, image.src, function(thumb){
+                alert("this is the thumb");
+                alert(thumb);
+                var thumbData = thumb;
+
                 navigator.geolocation.getCurrentPosition(function(pos){
                     document.getElementById("submitBtn").addEventListener("click", function(){
+                        var descData = document.getElementById("caption").value;
+
+                        var data = {
+                            'image_text' : imageData,
+                            'description' : descData,
+                            'image_thumb' : thumb,
+                            'lat' : pos.coords.latitude,
+                            'lng' : pos.coords.longitude,
+                        }
+
+                        alert("submitting")
+
                         mPost({
                             url: GLOBALS.server + "areas",
                             method: "POST",
-                            data: {
-                                'image_text' : imageData,
-                                'image_thumb' : thumb,
-                                'description' : document.getElementById("caption").value,
-                                'lat' : pos.coords.latitude,
-                                'lng' : pos.coords.longitude,
-                            },
+                            data: data,
                             success: function(data){
+                                alert("go")
                                 alert(data)
                             },
                             fail: function(error){
+                                alert("no")
                                 alert(error)
                             }
                         })
@@ -42,7 +55,7 @@ function onDeviceReady(){
            
         }, CALLBACKS.error, { quality: 50,
             targetWidth: 480,
-            targetHeight: 640,
+            targetHeight: 480,
             destinationType: Camera.DestinationType.DATA_URL
         });
         
@@ -54,33 +67,55 @@ function onDeviceReady(){
         navigator.geolocation.getCurrentPosition(function(pos){
             var lat = pos.coords.latitude;
             var long = pos.coords.longitude;
-
+            alert("fetch start")
             mPost({
                 url: GLOBALS.server + "areas/" + lat +"," + long,
                 method: "GET",
                 success: function(data){
+                    alert(data)
                     var dataObj = JSON.parse(data);
-                    for (var i = 0; i < find_array.length; ++i) {
-                        var p = find_array[i];
+                    for (var i = 0; i < dataObj.length; ++i) {
+                        var p = dataObj[i];
+                        
+
                         var li = document.createElement("li");
                         var link = document.createElement("a");
-                        var img = document.createElement("img");    
+                        var img = document.createElement("img");  
+                          
                         var details = document.createElement("p");
                         var distance = document.createElement("p");
 
+                        alert(p.image_text);
+
+                        alert(p.distance);
+
+                        var float = parseFloat(p.distance)
+                        alert(float);
+
+                        var meters = parseInt((float*1000000)/1000) + " m";
+                        alert("distance");
+                        alert(meters);
+
                         img.src = "data:image/jpeg;base64," + p.image_text;
-                        details.style.fontWeight = "700";
-                        details.innerHTML = p.description;
-                        distance.innerHTML = Math.parse(p.distance*100000/1000);
+                        img.style.width = "100%";
+                        img.style.height = "100%";
+                        details.innerHTML = "<strong>" + p.description + "</ strong>" ;
+                        distance.innerHTML = meters;
+
+                        alert("appender1")
 
                         link.appendChild(img);
                         link.appendChild(details);
                         link.appendChild(distance);
                         li.appendChild(link);
                         find_array.appendChild(li)
+
+                        alert("appender2")
                     }
                 },
-                fail: function(error){}
+                fail: function(error){
+                    alert(error)
+                }
             })
         });
     }
@@ -98,35 +133,29 @@ function resizeImage(longSideMax, url, callback) {
     tempImg.src = url;
     tempImg.onload = function() {
         try {
-			// Get image size and aspect ratio.
 			var targetWidth = tempImg.width;
 			var targetHeight = tempImg.height;
 			var aspect = tempImg.width / tempImg.height;
 
-			// Calculate shorter side length, keeping aspect ratio on image.
-			// If source image size is less than given longSideMax, then it need to be
-			// considered instead.
 			if (tempImg.width > tempImg.height) {
-			longSideMax = Math.min(tempImg.width, longSideMax);
-			targetWidth = longSideMax;
-			targetHeight = longSideMax / aspect;
+                longSideMax = Math.min(tempImg.width, longSideMax);
+                targetWidth = longSideMax;
+                targetHeight = longSideMax / aspect;
 			}
 			else {
-			longSideMax = Math.min(tempImg.height, longSideMax);
-			targetHeight = longSideMax;
-			targetWidth = longSideMax * aspect;
+                longSideMax = Math.min(tempImg.height, longSideMax);
+                targetHeight = longSideMax;
+                targetWidth = longSideMax * aspect;
 			}
 
-			// Create canvas of required size.
 			var canvas = document.createElement('canvas');
 			canvas.width = targetWidth;
 			canvas.height = targetHeight;
 
 			var ctx = canvas.getContext("2d");
-			// Take image from top left corner to bottom right corner and draw the image
-			// on canvas to completely fill into.
 			ctx.drawImage(this, 0, 0, tempImg.width, tempImg.height, 0, 0, targetWidth, targetHeight);
-            callback(canvas.toDataURL("image/jpeg"));
+
+            callback(canvas.toDataURL("image/jpeg").split("data:image/jpeg;base64,").join(""));
         } catch(e){
             callback(e);
         }
