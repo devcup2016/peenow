@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <script src="phonegap.js"></script>
+    <!-- <script src="phonegap.js"></script> -->
     <script src="assets/js/init.js"></script>
     <script>
     GLOBALS.origin = "find"
@@ -29,14 +29,24 @@
     <header>
         <h1>peenow</h1>
     </header>
-    <div id="gpopup" class="modal-d">
-        <p id="popupContent"></p>
-        <div class="btn-rouded-wrapper">
-            <!--either you have 2 options or 1-->
-            <a id="okBtn" href="javascript:void(0)" class="btn-rounded">Ok</a>
-            <a id="cancelBtn" href="javascript:void(0)" class="btn-rounded">Cancel</a>
+
+    <div id="preloader">
+        <div class="loaderContainer">
+            <img src="assets/image/39.gif" alt="">
         </div>
     </div>
+    
+    <div id="windowBg">
+        <div id="gpopup" class="modal-d">
+            <p id="popupContent"></p>
+            <div class="btn-rouded-wrapper">
+                <!--either you have 2 options or 1-->
+                <a id="okBtn" href="javascript:void(0)" class="btn-rounded">Ok</a>
+                <a id="cancelBtn" href="javascript:void(0)" class="btn-rounded">Cancel</a>
+            </div>
+        </div>
+    </div>
+
     <div class="container content">
         <!--view-->
         <ul class="places autoY" id="find_array"></ul>
@@ -52,7 +62,7 @@
         <a href="submit.html" class="col-4">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </a>
-        <a href="compass.html" class="col-4">
+        <a href="javascript:void(0)" class="col-4">
             <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
         </a>
     </footer>

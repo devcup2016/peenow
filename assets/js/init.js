@@ -34,10 +34,11 @@ function mPost(mPostObj) {
 }
 
 function PopUpManager() {
-    this.instance = document.getElementById("gpopup");
+    this.instance = document.getElementById("windowBg");
     this.okBtn = document.getElementById("okBtn");
     this.cancelBtn = document.getElementById("cancelBtn");
     this.popupContent = document.getElementById("popupContent");
+    this.preloader = document.getElementById("preloader");
 
     this.callback = null;
 
@@ -77,6 +78,5 @@ PopUpManager.prototype.open = function(type, content, callback) {
             // ...
             break;
     }
-
     this.callback = callback;
 };
