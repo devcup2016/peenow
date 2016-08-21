@@ -207,16 +207,16 @@ footer {
 
 .infowrapper a {
     /*    width: 70%;
-    display: inline-block;
-    background-color: #475059;
-    padding: 15px;
-    border-radius: 15px;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    color: #fff;
-    font-family: 'CameronSansExtraBold';
-    text-decoration: none;
-    position: relative;*/
+display: inline-block;
+background-color: #475059;
+padding: 15px;
+border-radius: 15px;
+-webkit-border-radius: 15px;
+-moz-border-radius: 15px;
+color: #fff;
+font-family: 'CameronSansExtraBold';
+text-decoration: none;
+position: relative;*/
 }
 
 .btn-rouded-wrapper {
@@ -264,16 +264,11 @@ footer {
     min-height: 100px;
     border: 3px solid #fff;
     background-color: rgba(255, 255, 255, 0.5);
-    z-index: 9999;
     padding: 20px 20px 5px;
     border-radius: 15px;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
     font-size: 20px;
-}
-
-#gpopup {
-    display: none;
 }
 
 .circle {
@@ -310,26 +305,87 @@ footer {
     border-bottom: 115px solid red;
 }
 
+#windowBg {
+    display: none;
+    z-index: 9999;
+    position: absolute;
+    top: 90px;
+    left: 0;
+    height: 478px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#preloader {
+    display: none;
+    z-index: 9999;
+    position: absolute;
+    top: 90px;
+    left: 0;
+    height: 478px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#preloader .loaderContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#preloader img {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
 .pos {
-	position: absolute;
-	display: inline-block;
+    position: absolute;
+    display: inline-block;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px;
+    font-family: 'CameronSansExtraBold';
 }
 
-.pos .south {
-
+.south {
+    left: 50%;
+    bottom: 150px;
+    background-color: red;
+    transform: translateX(-50%);
 }
 
-.pos .east {
-	right: 0;
-	top: 50%;
-	border:1px solid red;
-	transform: translateY(-50%);
+.east {
+    right: 0;
+    top: 50%;
+    background-color: red;
+    transform: translateY(-50%);
 }
 
-.pos .west {
-	
+.west {
+    left: 0;
+    top: 50%;
+    background-color: red;
+    transform: translateY(-50%);
 }
 
-.pos .south {
-	
+.north {
+    left: 50%;
+    top: 134px;
+    background-color: red;
+    transform: translateX(-50%);
 }

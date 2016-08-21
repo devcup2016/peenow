@@ -34,10 +34,11 @@ function mPost(mPostObj) {
 }
 
 function PopUpManager() {
-    this.instance = document.getElementById("gpopup");
+    this.instance = document.getElementById("windowBg");
     this.okBtn = document.getElementById("okBtn");
     this.cancelBtn = document.getElementById("cancelBtn");
     this.popupContent = document.getElementById("popupContent");
+    this.preloader = document.getElementById("preloader");
 
     this.okBtn.addEventListener('click', function() {
         alert('click ok');
@@ -77,9 +78,19 @@ PopUpManager.prototype.open = function(type, content) {
     }
 };
 
+PopUpManager.prototype.openLoader = function(){
+	this.preloader.style.display = "block";
+};
+
+PopUpManager.prototype.closeLoader = function(){
+	this.preloader.style.display = "none";
+};
+
+
 window.onload = function() {
     var PopupManager = new PopUpManager();
     PopupManager.init();
+    PopupManager.closeLoader();
     // PopupManager.debug();
 
    	// Sample Open
@@ -92,6 +103,6 @@ window.onload = function() {
 
     // Sample Close
     var delay = setTimeout(function(){
-    	PopupManager.close();
+    	// PopupManager.close();
     },3333);
 };
