@@ -286,6 +286,8 @@ position: relative;*/
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
     width: 30px;
     height: 30px;
     border-radius: 100%;
@@ -367,20 +369,26 @@ position: relative;*/
     bottom: 150px;
     background-color: red;
     transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
 }
 
 .east {
-    right: 0;
-    top: 50%;
+    right: -10px;
+    top: 47%;
     background-color: red;
     transform: translateY(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
 }
 
 .west {
-    left: 0;
-    top: 50%;
+    left: 27px;
+    top: 47%;
     background-color: red;
     transform: translateY(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
 }
 
 .north {
@@ -388,4 +396,6 @@ position: relative;*/
     top: 134px;
     background-color: red;
     transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
 }
