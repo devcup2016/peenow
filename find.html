@@ -2,9 +2,11 @@
 <html lang="en">
 
 <head>
-    <script src="phonegap.js"></script>
+    <!-- <script src="phonegap.js"></script> -->
     <script src="assets/js/init.js"></script>
-    <script>GLOBALS.origin = "find"</script>
+    <script>
+    GLOBALS.origin = "find"
+    </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,19 +26,17 @@
 </head>
 
 <body>
-
     <header>
         <h1>peenow</h1>
     </header>
-
-    <div class="modal-d">
-        Lorem ipsum dolor emet Lorem ipsum dolor emet Lorem ipsum dolor emet Lorem ipsum dolor emet  
+    <div id="gpopup" class="modal-d">
+        <p id="popupContent"></p>
         <div class="btn-rouded-wrapper">
             <!--either you have 2 options or 1-->
-            <a href="javascript:void(0)" class="btn-rounded">Ok</a>
+            <a id="okBtn" href="javascript:void(0)" class="btn-rounded">Ok</a>
+            <a id="cancelBtn" href="javascript:void(0)" class="btn-rounded">Cancel</a>
         </div>
     </div>
-
     <div class="container content">
         <!--view-->
         <ul class="places autoY" id="find_array">
@@ -47,7 +47,6 @@
                     <p>Distance</p>
                 </a>
             </li>
-
             <li>
                 <a href="">
                     <img src="http://www.kanvasstudios.com/wp-content/uploads/2015/06/logoicon_V_3.png" alt="">
@@ -55,7 +54,6 @@
                     <p>Distance</p>
                 </a>
             </li>
-
             <li>
                 <a href="">
                     <img src="http://www.kanvasstudios.com/wp-content/uploads/2015/06/logoicon_V_3.png" alt="">
@@ -63,7 +61,6 @@
                     <p>Distance</p>
                 </a>
             </li>
-
             <li>
                 <a href="">
                     <img src="http://www.kanvasstudios.com/wp-content/uploads/2015/06/logoicon_V_3.png" alt="">
@@ -71,7 +68,6 @@
                     <p>Distance</p>
                 </a>
             </li>
-
             <li>
                 <a href="">
                     <img src="http://www.kanvasstudios.com/wp-content/uploads/2015/06/logoicon_V_3.png" alt="">
@@ -79,21 +75,20 @@
                     <p>Distance</p>
                 </a>
             </li>
-
         </ul>
         <!--view-->
     </div>
     <footer>
-        <a  href="index.html" class="col-4">
+        <a href="index.html" class="col-4">
             <span class="glyphicon glyphicon glyphicon-home" aria-hidden="true"></span>
         </a>
-        <a  href="find.html" class="col-4 active">
+        <a href="find.html" class="col-4 active">
             <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
         </a>
-        <a  href="submit.html" class="col-4">
+        <a href="submit.html" class="col-4">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </a>
-        <a class="col-4">
+        <a href="compass.html" class="col-4">
             <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
         </a>
     </footer>

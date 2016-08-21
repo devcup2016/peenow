@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <script src="phonegap.js"></script>
+    <!-- <script src="phonegap.js"></script> -->
     <script src="assets/js/init.js"></script>
     <script>
     GLOBALS.origin = "submit"
@@ -26,20 +26,17 @@
 </head>
 
 <body>
-    
     <header>
         <h1>peenow</h1>
     </header>
-    
-    <div class="modal-d">
-        Lorem ipsum dolor emet Lorem ipsum dolor emet Lorem ipsum dolor emet Lorem ipsum dolor emet  
+    <div id="gpopup" class="modal-d">
+        <p id="popupContent"></p>
         <div class="btn-rouded-wrapper">
             <!--either you have 2 options or 1-->
-            <a href="javascript:void(0)" class="btn-rounded">Ok</a>
-            <a href="javascript:void(0)" class="btn-rounded">Cancel</a>
+            <a id="okBtn" href="javascript:void(0)" class="btn-rounded">Ok</a>
+            <a id="cancelBtn" href="javascript:void(0)" class="btn-rounded">Cancel</a>
         </div>
     </div>
-
     <div class="container content nopadding">
         <!--view-->
         <img src="" alt="" id="myImage">
@@ -59,7 +56,7 @@
         <a href="submit.html" class="col-4 active">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </a>
-        <a class="col-4">
+        <a href="compass.html" class="col-4">
             <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
         </a>
     </footer>

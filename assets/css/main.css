@@ -244,8 +244,8 @@ footer {
     font-family: 'CameronSansExtraBold';
     text-decoration: none;
     position: relative;
-    margin-right:2%;
-    margin-left: 2%; 
+    margin-right: 2%;
+    margin-left: 2%;
 }
 
 .btn-rounded:active {
@@ -270,4 +270,66 @@ footer {
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
     font-size: 20px;
+}
+
+#gpopup {
+    display: none;
+}
+
+.circle {
+    width: 350px;
+    height: 350px;
+    margin: 30px auto;
+    border: 3px solid #fff;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+}
+
+.circle .rotator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    background-color: #fff;
+}
+
+.circle .rotator .triangle {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: -115px;
+    left: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 115px solid red;
+}
+
+.pos {
+	position: absolute;
+	display: inline-block;
+}
+
+.pos .south {
+
+}
+
+.pos .east {
+	right: 0;
+	top: 50%;
+	border:1px solid red;
+	transform: translateY(-50%);
+}
+
+.pos .west {
+	
+}
+
+.pos .south {
+	
 }
